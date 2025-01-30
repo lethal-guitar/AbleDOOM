@@ -697,8 +697,10 @@ void M_QuickSave(void)
 	quickSaveSlot = -2;	// means to pick a slot now
 	return;
     }
-    DEH_snprintf(tempstring, 80, QSPROMPT, savegamestrings[quickSaveSlot]);
-    M_StartMessage(tempstring,M_QuickSaveResponse,true);
+    /*DEH_snprintf(tempstring, 80, QSPROMPT, savegamestrings[quickSaveSlot]);*/
+    /*M_StartMessage(tempstring,M_QuickSaveResponse,true);*/
+	M_DoSave(quickSaveSlot);
+	S_StartSound(NULL,sfx_swtchx);
 }
 
 
@@ -729,8 +731,10 @@ void M_QuickLoad(void)
 	M_StartMessage(DEH_String(QSAVESPOT),NULL,false);
 	return;
     }
-    DEH_snprintf(tempstring, 80, QLPROMPT, savegamestrings[quickSaveSlot]);
-    M_StartMessage(tempstring,M_QuickLoadResponse,true);
+    /*DEH_snprintf(tempstring, 80, QLPROMPT, savegamestrings[quickSaveSlot]);*/
+    /*M_StartMessage(tempstring,M_QuickLoadResponse,true);*/
+	M_LoadSelect(quickSaveSlot);
+	S_StartSound(NULL,sfx_swtchx);
 }
 
 
@@ -2085,7 +2089,7 @@ void M_Init (void)
     messageToPrint = 0;
     messageString = NULL;
     messageLastMenuActive = menuactive;
-    quickSaveSlot = -1;
+    quickSaveSlot = 0;
 
     // Here we could catch other version dependencies,
     //  like HELP1/2, and four episodes.
